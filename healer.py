@@ -1,6 +1,7 @@
 import os
 import requests
 import time
+import healer
 
 restart_count = 0
 error_count = 0
@@ -34,6 +35,11 @@ def get_metrics():
         "error_count": error_count
     }
 
-while True:
-    check_health()
-    time.sleep(10)
+ @app.route("/metrics")
+def metrics():
+    return healer.get_metrics()
+
+if __name__ == "__main__":
+    while True:
+        check_health()
+        time.sleep(10)
