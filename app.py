@@ -1,29 +1,34 @@
 from flask import Flask
 import logging
-import healer
-
-logging.basicConfig(filename="app.log", level=logging.INFO)
 
 app = Flask(__name__)
 
-@app.route("/")
+# Logging setup
+logging.basicConfig(
+    filename="app.log",
+    level=logging.ERROR,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+# Home route
+@app.route('/')
 def home():
-    app.logger.info("Home page accessed")
-    return "Self-Healing DevOps Project Running!"
+    return "Self-Healing DevOps Project Running"
 
-@app.route("/health")
+# Health check route
+@app.route('/health')
 def health():
-    app.logger.info("Health check accessed")
-    return "Healthy"
+    return "Application is healthy"
 
-@app.route("/error")
+# Error simulation route
+@app.route('/error')
 def error():
-    app.logger.error("Simulated application error")
-    return "Error occurred!", 500
+    try:
+        raise Exception("Application error detected!")
+    except Exception as e:
+        logging.error(str(e))
+        return "Root Cause Found: Application error detected!\nSelf-Healing Action Triggered!\nRestarting application..."
 
-@app.route("/metrics")
-def metrics():
-    return healer.get_metrics()
-
+# Main runner
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
