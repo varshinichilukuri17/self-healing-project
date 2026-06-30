@@ -17,3 +17,17 @@ WARNING:werkzeug: * Debugger is active!
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 465-621-369
 INFO:werkzeug: * Debugger PIN: 465-621-369
+2026-06-30 10:41:25,688 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.16.40.89:5000
+2026-06-30 10:41:25,691 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-30 10:41:25,695 - INFO -  * Restarting with stat
+2026-06-30 10:41:26,657 - WARNING -  * Debugger is active!
+2026-06-30 10:41:26,673 - INFO -  * Debugger PIN: 113-780-504
+2026-06-30 10:44:01,732 - INFO - 127.0.0.1 - - [30/Jun/2026 10:44:01] "GET / HTTP/1.1" 200 -
+2026-06-30 10:44:01,810 - INFO - 127.0.0.1 - - [30/Jun/2026 10:44:01] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-06-30 11:02:58,262 - INFO - 127.0.0.1 - - [30/Jun/2026 11:02:58] "GET / HTTP/1.1" 200 -
+2026-06-30 11:02:58,440 - INFO - 127.0.0.1 - - [30/Jun/2026 11:02:58] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-06-30 11:39:27,888 - INFO -  * Detected change in 'C:\\Users\\Varsh\\OneDrive\\Desktop\\self-healing-project\\app.py', reloading
+2026-06-30 11:39:28,230 - INFO -  * Restarting with stat

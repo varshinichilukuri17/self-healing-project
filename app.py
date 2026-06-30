@@ -1,34 +1,37 @@
 from flask import Flask
-import logging
+from prometheus_client import Counter, generate_latest
 
 app = Flask(__name__)
 
-# Logging setup
-logging.basicConfig(
-    filename="app.log",
-    level=logging.ERROR,
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
+# Prometheus metric
+REQUEST_COUNT = Counter("request_count", "Total Requests")
 
-# Home route
-@app.route('/')
+
+@app.route("/")
 def home():
+    REQUEST_COUNT.inc()
     return "Self-Healing DevOps Project Running"
 
-# Health check route
-@app.route('/health')
+
+@app.route("/health")
 def health():
+    REQUEST_COUNT.inc()
     return "Application is healthy"
 
-# Error simulation route
-@app.route('/error')
-def error():
-    try:
-        raise Exception("Application error detected!")
-    except Exception as e:
-        logging.error(str(e))
-        return "Root Cause Found: Application error detected!\nSelf-Healing Action Triggered!\nRestarting application..."
 
-# Main runner
+@app.route("/error")
+def error():
+    REQUEST_COUNT.inc()
+    return """
+    Root Cause Found: Application error detected!
+    Self-Healing Action Triggered! Restarting application...
+    """
+
+
+@app.route("/metrics")
+def metrics():
+    return generate_latest()
+
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000)

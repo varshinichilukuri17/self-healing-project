@@ -1,2 +1,4 @@
-flasks
+flask
 requests
+flask_cors
+prometheus_client
