@@ -31,3 +31,19 @@ INFO:werkzeug: * Debugger PIN: 465-621-369
 2026-06-30 11:02:58,440 - INFO - 127.0.0.1 - - [30/Jun/2026 11:02:58] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
 2026-06-30 11:39:27,888 - INFO -  * Detected change in 'C:\\Users\\Varsh\\OneDrive\\Desktop\\self-healing-project\\app.py', reloading
 2026-06-30 11:39:28,230 - INFO -  * Restarting with stat
+2026-06-30 12:36:53,714 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.16.40.89:5000
+2026-06-30 12:36:53,715 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-30 12:36:53,722 - INFO -  * Restarting with stat
+2026-06-30 12:36:54,865 - WARNING -  * Debugger is active!
+2026-06-30 12:36:54,882 - INFO -  * Debugger PIN: 113-780-504
+2026-06-30 13:00:25,481 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.16.40.89:5000
+2026-06-30 13:00:25,483 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-30 13:00:25,488 - INFO -  * Restarting with stat
+2026-06-30 13:00:26,659 - WARNING -  * Debugger is active!
+2026-06-30 13:00:26,674 - INFO -  * Debugger PIN: 113-780-504
