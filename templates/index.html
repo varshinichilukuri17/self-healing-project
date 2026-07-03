@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Self-Healing Infrastructure Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a, #1e293b, #111827);
+    color: white;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle, rgba(255,255,255,0.08) 2px, transparent 2px);
+    background-size: 30px 30px;
+    animation: floatBG 20s linear infinite;
+    z-index: -1;
+}
+
+@keyframes floatBG {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-200px); }
+}
+
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #94a3b8;
+    font-size: 18px;
+}
+
+.status-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.status-badge {
+    background: rgba(255,255,255,0.08);
+    padding: 12px 20px;
+    border-radius: 30px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+}
+
+.live {
+    color: #22c55e;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    50% { opacity: 0.5; }
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 40px;
+}
+
+.card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+    padding: 25px;
+    border-radius: 20px;
+    transition: 0.4s;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.25);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0px 15px 35px rgba(59,130,246,0.25);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon {
+    font-size: 35px;
+}
+
+.cpu { color: #ef4444; }
+.memory { color: #3b82f6; }
+.disk { color: #f59e0b; }
+.uptime { color: #10b981; }
+
+.metric-title {
+    color: #cbd5e1;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.metric-value {
+    font-size: 34px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.progress {
+    width: 100%;
+    height: 10px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    border-radius: 20px;
+    transition: width 1s ease;
+}
+
+.cpu-fill {
+    width: {{ cpu }}%;
+    background: linear-gradient(to right, #dc2626, #ef4444);
+}
+
+.memory-fill {
+    width: {{ memory }}%;
+    background: linear-gradient(to right, #2563eb, #3b82f6);
+}
+
+.disk-fill {
+    width: {{ disk }}%;
+    background: linear-gradient(to right, #d97706, #f59e0b);
+}
+
+.summary {
+    margin: 30px;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(15px);
+}
+
+.summary h2 {
+    margin-bottom: 20px;
+}
+
+.summary-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.summary-box {
+    text-align: center;
+}
+
+.summary-box i {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.footer {
+    text-align: center;
+    padding: 25px;
+    color: #94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+    <h1><i class="fas fa-server"></i> Self-Healing Infrastructure Dashboard</h1>
+    <p>Real-time observability, resilience monitoring, and automated recovery system</p>
+
+    <div class="status-row">
+        <div class="status-badge"><span class="live">●</span> Application Healthy</div>
+        <div class="status-badge">Prometheus Active</div>
+        <div class="status-badge">Grafana Connected</div>
+        <div class="status-badge">Auto Recovery Enabled</div>
+    </div>
+</div>
+
+<div class="dashboard">
+
+    <div class="card">
+        <div class="card-top">
+            <div class="icon cpu"><i class="fas fa-microchip"></i></div>
+        </div>
+        <div class="metric-title">CPU Usage</div>
+        <div class="metric-value">{{ cpu }}%</div>
+        <div class="progress"><div class="fill cpu-fill"></div></div>
+    </div>
+
+    <div class="card">
+        <div class="card-top">
+            <div class="icon memory"><i class="fas fa-memory"></i></div>
+        </div>
+        <div class="metric-title">Memory Usage</div>
+        <div class="metric-value">{{ memory }}%</div>
+        <div class="progress"><div class="fill memory-fill"></div></div>
+    </div>
+
+    <div class="card">
+        <div class="card-top">
+            <div class="icon disk"><i class="fas fa-database"></i></div>
+        </div>
+        <div class="metric-title">Disk Usage</div>
+        <div class="metric-value">{{ disk }}%</div>
+        <div class="progress"><div class="fill disk-fill"></div></div>
+    </div>
+
+    <div class="card">
+        <div class="card-top">
+            <div class="icon uptime"><i class="fas fa-clock"></i></div>
+        </div>
+        <div class="metric-title">System Uptime</div>
+        <div class="metric-value">{{ uptime }} sec</div>
+    </div>
+
+</div>
+
+<div class="summary">
+    <h2>Infrastructure Overview</h2>
+    <div class="summary-grid">
+        <div class="summary-box">
+            <i class="fas fa-heartbeat"></i>
+            <p>Health Monitoring</p>
+        </div>
+        <div class="summary-box">
+            <i class="fas fa-chart-line"></i>
+            <p>Live Metrics</p>
+        </div>
+        <div class="summary-box">
+            <i class="fas fa-rotate"></i>
+            <p>Auto Healing</p>
+        </div>
+        <div class="summary-box">
+            <i class="fas fa-shield"></i>
+            <p>Resilience Layer</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    Powered by Flask • Prometheus • Grafana • Docker
+</div>
+
+</body>
+</html>
