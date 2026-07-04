@@ -6,4 +6,6 @@ COPY . .
 
 RUN pip install flask prometheus_client psutil
 
+WORKDIR /app/monitoring
+
 CMD ["python", "app.py"]
