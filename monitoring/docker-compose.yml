@@ -1,6 +1,10 @@
-version: '3'
-
 services:
+  app:
+    build: .
+    container_name: self-healing-app
+    ports:
+      - "5000:5000"
+
   prometheus:
     image: prom/prometheus
     container_name: prometheus
